@@ -14,9 +14,8 @@ def success_fetch_user_list(response):
 def error_fetch_user_list(e):
     print(e)
 
-wr.json_request(url = url, success=success_fetch_user_list, error=error_fetch_user_list)    # 기본 에러함수
+wr.json_request(url = url ,success=success_fetch_user_list, error=error_fetch_user_list)    # 기본 에러함수
 wr.json_request(url = url, success=success_fetch_user_list)     # web_request에서 정의한 lambda로 출력
-
 
 """
 json_result = wr.json_request(url)

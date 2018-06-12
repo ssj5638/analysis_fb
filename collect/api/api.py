@@ -4,7 +4,7 @@ from urllib.parse import urlencode
 from .web_request import json_request   # 함수 import
 
 BASE_URL_FB_API = 'https://graph.facebook.com/v3.0' # python에는 상수 없음 대문자로 표시
-ACCESS_TOKEN = "EAACEdEose0cBANwlZArNRD4Q4skV6tFFd6VZCxgwmyZCf4c09ZBUYzNdKRGPodjwN0kQQPQGxFWHJsGN4SRfNgKN3bxlKqegbBcp2Eu7ZA7LkFBlhlPysvbbitluZB1NDFNZBgamKjjlu9GvGfY5Wc8w2NKcen2m5WdhLXix2xyLzWOIM1jG1uhnSTm5lZCZCZBImShgA2t1g9eAZDZD"
+ACCESS_TOKEN = "EAACEdEose0cBABQNlkWMZCZAMikKfZCZAU7ZC8DSZBm6AGJ4GfxZBIjQJejhG8oznir8YIZAOkxD7i68KsWH9us2LOYkMtSuuTpyYWliX8v1J1OW8DBdSR4HV3ZCNxTZAZBWqvMhFO4gouEGxfM4uXwLLYVxNCpnS2b8NY9JY5u2Lnsukwru0l8sk2evf8FRZAG8bVXcsDWZCyj5tzQZDZD"
 
 
 def fb_gen_url(base=BASE_URL_FB_API, node = '', **params):       # **params : dict 형대로 받기
@@ -13,7 +13,7 @@ def fb_gen_url(base=BASE_URL_FB_API, node = '', **params):       # **params : di
     return url
 
 
-def fb_name_to_id(pagename):
+def fb_name_to_id(pagename):            # ex) jtbcnews id 값 받아오기
     url = fb_gen_url(node=pagename, access_token = ACCESS_TOKEN)
     json_result = json_request(url=url)
 
@@ -24,5 +24,22 @@ def fb_fetch_posts(pagename, since, until):        # 중요!!! crawler
                      fields='id,message,link,name,type,shares,reactions,created_time,comments.limit(0).summary(true).limit(0).summary(true)',
                      since=since, until=until, limit=50, access_token=ACCESS_TOKEN)
 
-    json_result = json_request(url=url)
-    print(json_result)
+    isnext = True   # 판단 확인
+    while isnext is True:
+        json_result = json_request(url=url)
+
+        paging = None if json_result is None else json_result.get('paging')
+        posts = None if json_result is None else json_result.get('data')
+
+        url = None if paging is None else paging.get('next')
+        isnext = url is not None
+
+        yield posts
+
+""" 
+삼항 연산자로 변경
+if json_result is None:
+    paging = None
+else:
+    paging = json_result.get('paging')
+"""

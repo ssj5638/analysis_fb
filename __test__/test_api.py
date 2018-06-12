@@ -8,5 +8,6 @@ id = api.fb_name_to_id("jtbcnews")
 print(id)
 '''
 
-api.fb_fetch_posts("jtbcnews", '2018-01-01', '2018-12-31')
-                   
+for posts in api.fb_fetch_posts('jtbcnews', '2017-01-01', '2017-12-31'):
+    print(posts)
+# print(len(results))
