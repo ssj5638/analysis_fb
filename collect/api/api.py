@@ -4,7 +4,7 @@ from urllib.parse import urlencode
 from .web_request import json_request   # 함수 import
 
 BASE_URL_FB_API = 'https://graph.facebook.com/v3.0' # python에는 상수 없음 대문자로 표시
-ACCESS_TOKEN = "EAACEdEose0cBABQNlkWMZCZAMikKfZCZAU7ZC8DSZBm6AGJ4GfxZBIjQJejhG8oznir8YIZAOkxD7i68KsWH9us2LOYkMtSuuTpyYWliX8v1J1OW8DBdSR4HV3ZCNxTZAZBWqvMhFO4gouEGxfM4uXwLLYVxNCpnS2b8NY9JY5u2Lnsukwru0l8sk2evf8FRZAG8bVXcsDWZCyj5tzQZDZD"
+ACCESS_TOKEN = "EAACEdEose0cBAJ5YwJw2VBU3JJM3D5hNjYZBlyoEqfgodem329GC0213h2Vkl5xUCHla7X4tn9W38LFPtpRbEVzl6mYd8VkLTEiXligKMEvDv6BvkXMSAPZCB2lGpz61sbS1xKyWEeZBDTiBeZA51ZC2wlWJkwoZCTAoaUdR5CZCsLsGLmMVEc4paHjYu3VGKkZD"
 
 
 def fb_gen_url(base=BASE_URL_FB_API, node = '', **params):       # **params : dict 형대로 받기
