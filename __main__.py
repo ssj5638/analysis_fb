@@ -21,11 +21,17 @@ if __name__ == '__main__':      # __name__ 내장 속성
     # json데이터를 str로
     for item in items:
         data = analyze.json_to_str(item['resultfile'], 'message')           # 본문 내용을 str로 변환
-        print(data)
+        # print(data)
         item['count_wordfreq'] = analyze.count_wordfteq(data)            # item['word_freq'] 시각화용
 
-        print(item['count_wordfreq'])
+        # print(item['count_wordfreq'])
 
 
     # 데이터 시각화 (visualize)
+    for item in items:
+        count = item['count_wordfreq']
+        count_m50 = dict(count.most_common(50))
 
+        filename = '%s_%s_%s' % (item['pagename'], item['since'], item['until'])
+        visualize.wordcloud(filename, count_m50)
+        # visualize.graph_bar
