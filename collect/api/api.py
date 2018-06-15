@@ -4,7 +4,7 @@ from urllib.parse import urlencode
 from .web_request import json_request   # 함수 import
 
 BASE_URL_FB_API = 'https://graph.facebook.com/v3.0' # python에는 상수 없음 대문자로 표시
-ACCESS_TOKEN = "EAACEdEose0cBAJ5YwJw2VBU3JJM3D5hNjYZBlyoEqfgodem329GC0213h2Vkl5xUCHla7X4tn9W38LFPtpRbEVzl6mYd8VkLTEiXligKMEvDv6BvkXMSAPZCB2lGpz61sbS1xKyWEeZBDTiBeZA51ZC2wlWJkwoZCTAoaUdR5CZCsLsGLmMVEc4paHjYu3VGKkZD"
+ACCESS_TOKEN = "EAACEdEose0cBAJuEY6NyTvH1el0V7BYIwNNXFSPj7zGj8cmaI9xlEdPouJDHvuSSDIou0GOtzFXZCxeoJT4DY1VGeIJL6yVZBGL6bnsNhJbyC0doXbmFwZClwY41nQbT1AJBi3HMUlHJuZAs9GIXnG22ZCZBN6rQqeZAZAi5Vxtv8lN8AF3KSPvgc18uiZA7y3qoZD"
 
 
 def fb_gen_url(base=BASE_URL_FB_API, node = '', **params):       # **params : dict 형대로 받기
@@ -29,8 +29,8 @@ def fb_fetch_posts(pagename, since, until):        # 중요!!! crawler
         json_result = json_request(url=url)
 
         paging = None if json_result is None else json_result.get('paging')
-        posts = None if json_result is None else json_result.get('data')
 
+        posts = None if json_result is None else json_result.get('data')
         url = None if paging is None else paging.get('next')
         isnext = url is not None
 

@@ -31,22 +31,26 @@ def preprocess_post(post):   # post 데이터를 전처리 // 비공개
     post['created_time'] = kst.strftime('%Y-%m-%d %H:%M:%S:')
 
 
-def crawling(pagename, since, until):   # 공개
+def crawling(pagename, since, until, fetch = True):   # 공개
     results = []
     filename = '%s/%s_%s_%s.joson' % (RESULT_DIRECTORY, pagename, since, until)  # 파일 경로/네임 지정
-    for posts in api.fb_fetch_posts(pagename, since, until):
-        for post in posts:
-            preprocess_post(post)
 
-        results += posts
+    if fetch:
+        for posts in api.fb_fetch_posts(pagename, since, until):
+            for post in posts:
+                preprocess_post(post)
 
-    # save results to file (저장/적재)
-    with open(filename, 'w', encoding='utf-8') as outfile:
-        json_string = json.dumps(results,
-                   indent = 4,
-                   sort_keys = True,
-                   ensure_ascii = False)  # 아스키 코드로만 구성되어있는가?
-        outfile.write(json_string)
+            results += posts
+
+        # save results to file (저장/적재)
+        with open(filename, 'w', encoding='utf-8') as outfile:
+            json_string = json.dumps(results,
+                       indent = 4,
+                       sort_keys = True,
+                       ensure_ascii = False)  # 아스키 코드로만 구성되어있는가?
+            outfile.write(json_string)
+
+    return filename
 
 
 if os.path.exists(RESULT_DIRECTORY) is False:
