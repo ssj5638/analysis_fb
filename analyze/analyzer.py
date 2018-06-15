@@ -1,5 +1,7 @@
 import json
 import re           # 정규 표현식
+from konlpy.tag import Twitter
+from collections import Counter     # 중복 확인하여 카운트
 
 
 def json_to_str (filename, key):
@@ -21,3 +23,11 @@ def json_to_str (filename, key):
 
     return (data)
 
+
+def count_wordfteq(data):
+    twitter = Twitter()
+    nouns = twitter.nouns(data)
+
+    count = Counter(nouns)
+
+    return count

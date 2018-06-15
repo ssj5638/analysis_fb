@@ -22,7 +22,9 @@ if __name__ == '__main__':      # __name__ 내장 속성
     for item in items:
         data = analyze.json_to_str(item['resultfile'], 'message')           # 본문 내용을 str로 변환
         print(data)
-        # item['count_wordfreq'] = analyze.count_wordfteq(data)            # item['word_freq'] 시각화용
+        item['count_wordfreq'] = analyze.count_wordfteq(data)            # item['word_freq'] 시각화용
+
+        print(item['count_wordfreq'])
 
 
     # 데이터 시각화 (visualize)
